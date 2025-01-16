@@ -1,0 +1,69 @@
+<div class="search-box">
+  <div class="row">
+    <input type="text" id="input-box" placeholder="Search" autocomplete="off" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="input-icon"
+      height="20px"
+      width="20px"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+        clip-rule="evenodd"></path>
+    </svg>
+  </div>
+  <div class="result-box custom-scrollbar"></div>
+</div>
+<script>
+  import tools from '../../assets/tools.json';
+  import type { Tool } from '../../models/Tool';
+
+  const resultsBox = document.querySelector('.result-box');
+  const inputBox = document.getElementById('input-box') as HTMLInputElement;
+
+  if (inputBox) {
+    inputBox.onkeyup = function () {
+      let input = inputBox.value.toLowerCase();
+      let result: Tool[] = [];
+      if (input.length > 0) {
+        result = tools.filter((tool) => {
+          return tool.name.toLowerCase().includes(input.toLocaleLowerCase());
+        });
+      }
+      display(result);
+      if (!result.length && resultsBox) {
+        resultsBox.innerHTML = '';
+      }
+    };
+  }
+  function display(result: Tool[]) {
+    const content = result.map((tool) => {
+      return `<li>${tool.name}</li>`;
+    });
+    if (resultsBox) {
+      resultsBox.innerHTML = `<ul>${content.join('')}</ul>`;
+    }
+    result.forEach((tool, index) => {
+      const list = resultsBox?.querySelector(
+        'li:nth-child(' + (index + 1) + ')'
+      ) as HTMLLIElement;
+      list.onclick = function () {
+        selectInput(list);
+      };
+    });
+  }
+  function selectInput(list: HTMLLIElement) {
+    tools.forEach((tool) => {
+      if (tool.name === list.innerText) {
+        location.href = tool.path;
+      }
+    });
+    inputBox.value = list.innerText;
+    if (resultsBox) {
+      resultsBox.innerHTML = '';
+    }
+  }
+</script>

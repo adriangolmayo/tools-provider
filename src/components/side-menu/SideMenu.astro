@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets';
+import Logo from '../../assets/logo.png';
+import tools from '../../assets/tools.json';
+import categories from '../../assets/categories.json';
+
+const sideMenuOptions = categories.map((category) => ({
+  name: category.name,
+  logoPath: category.logoPath,
+  subOptions: tools
+    .filter((tool) => tool.category === category.name)
+    .map((tool) => ({
+      name: tool.name,
+      path: tool.path,
+    })),
+}));
+---
+
+<nav id="sidebar">
+  <ul>
+    <li>
+      <a id="logo" href="/">
+        <Image src={Logo} alt="Logo" />
+      </a>
+      <button id="toggle-btn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          ><path
+            d="m313-480 155 156q11 11 11.5 27.5T468-268q-11 11-28 11t-28-11L228-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T468-692q11 11 11 28t-11 28L313-480Zm264 0 155 156q11 11 11.5 27.5T732-268q-11 11-28 11t-28-11L492-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T732-692q11 11 11 28t-11 28L577-480Z"
+          ></path>
+        </svg>
+      </button>
+    </li>
+    {
+      sideMenuOptions.map((option) => (
+        <li>
+          <button class="dropdown-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+            >
+              <path d={option.logoPath} />
+            </svg>
+            <span>{option.name}</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+            >
+              <path d="M480-361q-8 0-15-2.5t-13-8.5L268-556q-11-11-11-28t11-28q11-11 28-11t28 11l156 156 156-156q11-11 28-11t28 11q11 11 11 28t-11 28L508-372q-6 6-13 8.5t-15 2.5Z" />
+            </svg>
+          </button>
+          <ul class="sub-menu">
+            <div>
+              {option.subOptions.map((suboption) => (
+                <li>
+                  <a href={suboption.path}>{suboption.name}</a>
+                </li>
+              ))}
+            </div>
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+  <ul></ul>
+</nav>
+
+<script defer>
+  const toggleButton = document.getElementById('toggle-btn');
+  const sidebar = document.getElementById('sidebar');
+  const dropdownButtons = Array.from(
+    sidebar.getElementsByClassName('dropdown-btn')
+  );
+
+  toggleButton.addEventListener('click', () => {
+    sidebar.classList.toggle('close');
+    toggleButton.classList.toggle('rotate');
+    closeAllSubMenus();
+  });
+
+  dropdownButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!button.nextElementSibling.classList.contains('show')) {
+        closeAllSubMenus();
+      }
+
+      button.nextElementSibling.classList.toggle('show');
+      button.classList.toggle('rotate');
+
+      if (sidebar.classList.contains('close')) {
+        sidebar.classList.toggle('close');
+        toggleButton.classList.toggle('rotate');
+      }
+    });
+  });
+
+  function closeAllSubMenus() {
+    Array.from(sidebar.getElementsByClassName('show')).forEach((ul) => {
+      ul.classList.remove('show');
+      ul.previousElementSibling.classList.remove('rotate');
+    });
+  }
+</script>
