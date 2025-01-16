@@ -25,6 +25,7 @@ html.dark {
 html{
   font-family: Poppins, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5rem;
+  font-size: 13px;
 }
 body{
   min-height: 100vh;
@@ -234,12 +235,11 @@ main p{
   height: 70px;
   padding: 1em;
   margin-top: 20px;
-  border-right: 1px solid var(--line-clr);
+  left: 0;
 
   position: sticky;
   display: flex;
   justify-content: space-between;
-  transition: 300ms ease-in-out;
   overflow: visible;
   text-wrap: nowrap;
 }
@@ -265,6 +265,7 @@ a#home svg {
 }
 .row {
   height: 100%;
+  width: 100%;
   display:flex;
   align-items: center;
 }
@@ -274,6 +275,7 @@ a#home svg {
   background: transparent;
   border: 0;
   outline: 0;
+  width: 10px;
   font-size: 18px;
   color: var(--text-clr);
   margin-left: 10px;
@@ -285,7 +287,8 @@ a#home svg {
   max-height: 300px;
   overflow-y: scroll;
 	background-color: var(--subase-clr);
-
+  z-index: 10; 
+  opacity: 1;
 }
 .result-box ul{
   border-top: 1px solid var(--line-clr);
@@ -307,9 +310,37 @@ a#home svg {
 .custom-scrollbar::-webkit-scrollbar-thumb {
 	background-color: var(--line-clr);
 }
-#about-button, #theme-toggle {
+#theme-toggle {
   border: none;
   border-radius: .5em;
   background: none;
   cursor: pointer;
+}
+.link {
+  text-decoration: none;
+  color: green;
+}
+.content{
+  box-sizing: border-box;
+  width: 100%;
+  flex-grow: 1; 
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+.title{
+  width: 100%;
+  max-width: 600px;
+  text-align: justify;
+  margin: 20px 0;
+}
+.text-class{
+  width: 100%;
+  max-width: 600px;
+  text-align: justify;
+  text-justify: inter-word;
+  margin:auto;
+  word-wrap: break-word;
 }
