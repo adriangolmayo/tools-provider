@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Code HMAC Generator",
+    "description": "Generate HMAC code",
+    "category": "Cryptography",
+    "path": "/tools/code-formatter"
+  },
+  {
+    "name": "JSON Validator",
+    "description": "Validate your JSON",
+    "category": "Cryptography",
+    "path": "/tools/json-validator"
+  },
+  {
+    "name": "Regex Tester",
+    "description": "Test your regex",
+    "category": "Cryptography",
+    "path": "/tools/regex-tester"
+  },
+  {
+    "name": "Code Formatter",
+    "description": "Format your code",
+    "category": "Converter",
+    "path": "/tools/code-formatter"
+  }
+]
