@@ -5,6 +5,7 @@ html.light{
   --content-clr: #fdfdff;
   --line-clr: #42434a;
   --hover-clr: #C0C0C0;
+  --hover-search-box-clr: #909090;
   --text-clr: #11121a;
   --accent-clr: #5e63ff;
   --secondary-text-clr: #b0b3c1;
@@ -15,6 +16,7 @@ html.dark {
   --content-clr: #313137;       
   --line-clr: #3c3d45;         
   --hover-clr: #5e5f66;         
+  --hover-search-box-clr: #5e5f66;         
   --text-clr: #e6e6ef;         
   --accent-clr: #5e63ff;       
   --secondary-text-clr: #8a8c94; 
@@ -301,7 +303,7 @@ a#home svg {
   cursor: pointer;
 } 
 .result-box ul li:hover{
-  background-color: var(--hover-clr);
+  background-color: var(--hover-search-box-clr);
 }
 .custom-scrollbar::-webkit-scrollbar {
 	width: 6px;
