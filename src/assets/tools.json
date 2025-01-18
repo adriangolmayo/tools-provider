@@ -1,26 +1,14 @@
 [
   {
-    "name": "Code HMAC Generator",
-    "description": "Generate HMAC code",
+    "name": "Token generator",
+    "description": "Generate random string with the chars you want, uppercase or lowercase letters, numbers and/or symbols.",
     "category": "Cryptography",
-    "path": "/tools/code-formatter"
+    "path": "/tools/token-generator"
   },
   {
-    "name": "JSON Validator",
-    "description": "Validate your JSON",
-    "category": "Cryptography",
-    "path": "/tools/json-validator"
-  },
-  {
-    "name": "Regex Tester",
-    "description": "Test your regex",
-    "category": "Cryptography",
-    "path": "/tools/regex-tester"
-  },
-  {
-    "name": "Code Formatter",
-    "description": "Format your code",
+    "name": "Milliseconds to date",
+    "description": "Convert milliseconds to date.",
     "category": "Converter",
-    "path": "/tools/code-formatter"
+    "path": "/tools/milliseconds-to-date"
   }
 ]

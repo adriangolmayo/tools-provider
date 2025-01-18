@@ -1,0 +1,131 @@
+---
+import BaseLayoutTool from '../../components/tools/BaseLayoutTool.astro';
+import { getTool } from '../../components/utils';
+
+const currentTool = getTool(Astro.url.pathname);
+---
+
+<BaseLayoutTool currentTool={currentTool}>
+  <form id="tokenForm" class="container-tool">
+    <div class="checkbox-container">
+      <label class="checkbox">
+        <span>Include Uppercase Letters</span>
+        <input type="checkbox" id="uppercase" class="checkbox__input" checked />
+        <div class="checkbox__box"></div>
+      </label>
+      <label class="checkbox">
+        <span>Include Lowercase Letters</span>
+
+        <input type="checkbox" id="lowercase" class="checkbox__input" checked />
+        <div class="checkbox__box"></div>
+      </label>
+      <label class="checkbox">
+        <span>Include Uppercase Letters</span>
+        <input type="checkbox" id="symbols" class="checkbox__input" checked />
+        <div class="checkbox__box"></div>
+      </label>
+      <label class="checkbox"
+        ><input type="checkbox" id="numbers" class="checkbox__input" checked />
+        Include Numbers
+        <div class="checkbox__box"></div>
+      </label>
+    </div>
+    <div class="form-group">
+      <label id="tokenLengthText" for="tokenLength">Length </label>
+      <span>(</span>
+      <span id="lengthValue">64</span>
+      <span>)</span>
+      <input type="range" id="tokenLength" min="4" max="512" value="64" />
+    </div>
+    <textarea id="textAreaTokenDisplay" class="token-display" readonly
+    ></textarea>
+    <div class="button-group">
+      <button type="button" class="button-display" id="refreshToken"
+        >Refresh</button
+      >
+      <button type="button" class="button-display" id="copyToken">Copy</button>
+    </div>
+  </form>
+</BaseLayoutTool>
+
+<script>
+  import { generateToken } from '../../components/utils';
+  function calculateToken(): void {
+    const includeUppercase = (
+      document.getElementById('uppercase') as HTMLInputElement
+    ).checked;
+    const includeLowercase = (
+      document.getElementById('lowercase') as HTMLInputElement
+    ).checked;
+    const includeSymbols = (
+      document.getElementById('symbols') as HTMLInputElement
+    ).checked;
+    const includeNumbers = (
+      document.getElementById('numbers') as HTMLInputElement
+    ).checked;
+    const length = parseInt(
+      (document.getElementById('tokenLength') as HTMLInputElement).value
+    );
+    (
+      document.getElementById('textAreaTokenDisplay') as HTMLInputElement
+    ).value = generateToken(
+      includeUppercase,
+      includeLowercase,
+      includeSymbols,
+      includeNumbers,
+      length
+    );
+    document.getElementById('textAreaTokenDisplay').style.height = 'auto';
+  }
+  // Initial token generation
+  calculateToken();
+
+  // Event listeners in form
+  (document.getElementById('tokenLength') as HTMLInputElement).addEventListener(
+    'input',
+    function () {
+      document.getElementById('lengthValue').textContent = this.value;
+      calculateToken();
+    }
+  );
+  (document.getElementById('uppercase') as HTMLInputElement).addEventListener(
+    'input',
+    function () {
+      calculateToken();
+    }
+  );
+  (document.getElementById('lowercase') as HTMLInputElement).addEventListener(
+    'input',
+    function () {
+      calculateToken();
+    }
+  );
+  (document.getElementById('symbols') as HTMLInputElement).addEventListener(
+    'input',
+    function () {
+      calculateToken();
+    }
+  );
+  (document.getElementById('numbers') as HTMLInputElement).addEventListener(
+    'input',
+    function () {
+      calculateToken();
+    }
+  );
+
+  document
+    .getElementById('refreshToken')
+    .addEventListener('click', function () {
+      calculateToken();
+    });
+
+  document.getElementById('copyToken').addEventListener('click', function () {
+    const textAreaTokenDisplay = document.getElementById(
+      'textAreaTokenDisplay'
+    ) as HTMLTextAreaElement;
+    textAreaTokenDisplay.select();
+    textAreaTokenDisplay.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    // alert('Token copied to clipboard!');
+  });
+</script>

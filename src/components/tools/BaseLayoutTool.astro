@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { currentTool } = Astro.props;
+---
+
+<BaseLayout>
+  <div class="content">
+    <h1 class="title">{currentTool.name}</h1>
+    <hr class="horizontal-bar" />
+    <p class="text-class">
+      {currentTool.description}
+    </p>
+    <slot />
+  </div>
+</BaseLayout>

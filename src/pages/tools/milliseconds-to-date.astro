@@ -1,0 +1,15 @@
+---
+import BaseLayoutTool from '../../components/tools/BaseLayoutTool.astro';
+import { getTool } from '../../components/utils';
+
+const currentTool = getTool(Astro.url.pathname);
+---
+
+<BaseLayoutTool currentTool={currentTool}>
+  <form id="tokenForm" class="container-tool">
+    <div style="margin:50px; align-items: center;">
+      <h1 style="margin-bottom:20px;">In developing &#128513</h1>
+      <h1>Thank you for your patient!</h1>
+    </div>
+  </form>
+</BaseLayoutTool>
