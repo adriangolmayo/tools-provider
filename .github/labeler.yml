@@ -1,0 +1,8 @@
+has-model-changes:
+    - src/models/**
+
+has-data-changes:
+    - deploy/assets/**
+
+dependencies:
+    - package.json

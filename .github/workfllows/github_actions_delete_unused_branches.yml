@@ -1,0 +1,27 @@
+name: Delete Abandoned Branches Action
+
+on:
+  schedule:
+    - cron: "0 0 * * MON"
+
+jobs:
+  cleanup_unused_branches:
+    runs-on: ubuntu-latest
+    name: Clean up unused branches
+    steps:
+      - name: Start Event
+        run: 'echo "😈😈😈 Delete Unused Branches Event Triggered. 😈😈😈"'
+      - name: Executing Workflow
+        uses: phpdocker-io/github-actions-delete-abandoned-branches@v1
+        id: delete_branches
+        with:
+          github_token: ${{ secrets.STALE_BRANCHES_GITHUB_TOKEN }}
+          last_commit_age_days: 60
+          ignore_branches: dont-deleteme
+          github_base_url: https://api.github.com
+
+          # Set 'dry_run: yes' for debugging purposes
+          dry_run: no
+
+      - name: Workflow Result
+        run: "echo 'Workflow Finished. Deleted branches: ${{ steps.delete_stuff.outputs.deleted_branches }}'"
