@@ -1,18 +1,21 @@
+import html from "@html-eslint/eslint-plugin";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
-import astro from "eslint-plugin-astro";
 
 export default [
   {
-    files: ["**/*.astro"],
-    plugins: { astro },
-    languageOptions: {
-      parser: astro.parser,
-    },
-    rules: {
-      ...astro.configs.recommended.rules,
-    },
+    ignores: ["node_modules", "dist"], 
   },
+  // {
+  //   files: ["**/*.astro"],
+  //   plugins: { astro },
+  //   languageOptions: {
+  //     parser: astro.parser,
+  //   },
+  //   rules: {
+  //     ...astro.configs.recommended.rules,
+  //   },
+  // },
   {
     files: ["**/*.{js,ts}"],
     languageOptions: {
