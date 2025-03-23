@@ -5,6 +5,7 @@ import { getTool } from '../../components/utils';
 const currentTool = getTool(Astro.url.pathname);
 ---
 
+{Astro.url.pathname}
 {
   currentTool != null && (
     <BaseLayoutTool currentTool={currentTool}>
