@@ -1,12 +1,9 @@
-import path from "path";
 import tools from "../assets/tools.json";
 import type { Tool } from "../models/Tool";
 
-export function getTool(currentPath: string): Tool | undefined {
+export function getTool(toolId: string): Tool | undefined {
   return (tools as Tool[]).find((tool) => {
-    const basePath = import.meta.env.BASE_URL;
-    const toolPath = basePath + tool.path;
-    if (path.normalize(toolPath) === path.normalize(currentPath)) {
+    if (toolId==tool.id) {
       return tool;
     }
   });

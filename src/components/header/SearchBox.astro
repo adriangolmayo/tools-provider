@@ -58,7 +58,8 @@
   function selectInput(list: HTMLLIElement) {
     tools.forEach((tool) => {
       if (tool.name === list.innerText) {
-        location.href = tool.path;
+        const basePath = import.meta.env.BASE_URL;
+        location.href = basePath + tool.path;
       }
     });
     inputBox.value = list.innerText;
