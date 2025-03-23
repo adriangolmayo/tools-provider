@@ -7,7 +7,8 @@ const currentTool = getTool(Astro.url.pathname);
 ---
 
 {Astro.url.pathname}
-{tools}
+{tools[0].path}
+{tools[1].path}
 {
   currentTool != null && (
     <BaseLayoutTool currentTool={currentTool}>
