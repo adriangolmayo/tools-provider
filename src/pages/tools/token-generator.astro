@@ -1,11 +1,13 @@
 ---
 import BaseLayoutTool from '../../components/tools/BaseLayoutTool.astro';
 import { getTool } from '../../components/utils';
+import tools from '../../assets/tools.json';
 
 const currentTool = getTool(Astro.url.pathname);
 ---
 
 {Astro.url.pathname}
+{tools}
 {
   currentTool != null && (
     <BaseLayoutTool currentTool={currentTool}>
