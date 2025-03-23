@@ -4,6 +4,8 @@ import Logo from '../../assets/logo.png';
 import tools from '../../assets/tools.json';
 import categories from '../../assets/categories.json';
 
+const basePath = import.meta.env.BASE_URL;
+
 const sideMenuOptions = categories.map((category) => ({
   name: category.name,
   logoPath: category.logoPath,
@@ -11,7 +13,7 @@ const sideMenuOptions = categories.map((category) => ({
     .filter((tool) => tool.category === category.name)
     .map((tool) => ({
       name: tool.name,
-      path: tool.path,
+      path: basePath + tool.path,
     })),
 }));
 ---
@@ -19,7 +21,7 @@ const sideMenuOptions = categories.map((category) => ({
 <nav id="sidebar">
   <ul>
     <li>
-      <a id="logo" href="/">
+      <a id="logo" href=`${basePath}`>
         <Image src={Logo} alt="Logo" />
       </a>
       <button id="toggle-btn">

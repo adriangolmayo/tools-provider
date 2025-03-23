@@ -1,9 +1,11 @@
 ---
 import SearchBox from './SearchBox.astro';
+const basePath = import.meta.env.BASE_URL;
+const aboutLink = `${basePath}/about`;
 ---
 
 <nav id="header">
-  <a id="home" href="/">
+  <a id="home" href=`${basePath}`>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 -960 960 960"
@@ -50,7 +52,7 @@ import SearchBox from './SearchBox.astro';
         ></path></svg
       >
     </button>
-    <a class="link" href="/about">
+    <a class="link" href=`${aboutLink}`>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="30px"

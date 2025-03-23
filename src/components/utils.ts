@@ -3,7 +3,9 @@ import type { Tool } from "../models/Tool";
 
 export function getTool(path: string): Tool | undefined {
   return (tools as Tool[]).find((tool) => {
-    if (tool.path === path) {
+    const basePath = import.meta.env.BASE_URL;
+    const toolPath = basePath + tool.path;
+    if (toolPath === path) {
       return tool;
     }
   });
