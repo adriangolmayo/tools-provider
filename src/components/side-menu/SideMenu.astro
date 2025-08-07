@@ -21,9 +21,11 @@ const sideMenuOptions = categories.map((category) => ({
 <nav id="sidebar">
   <ul>
     <li>
-      <a id="logo" href=`${basePath}`>
-        <Image src={Logo} alt="Logo" />
-      </a>
+      <div id="logo-link">
+        <a href=`${basePath}`>
+          <Image id="logo" src={Logo} alt="Logo" />
+        </a>
+      </div>
       <button id="toggle-btn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -80,9 +82,15 @@ const sideMenuOptions = categories.map((category) => ({
   const dropdownButtons = Array.from(
     sidebar.getElementsByClassName('dropdown-btn')
   );
+  const isSidebarClose = localStorage.getItem('isSidebarClose') === 'true';
 
+  if (isSidebarClose) {
+    sidebar.classList.add('close');
+    toggleButton.classList.add('rotate');
+  }
   toggleButton.addEventListener('click', () => {
-    sidebar.classList.toggle('close');
+    const isSidebarClose = sidebar.classList.toggle('close');
+    localStorage.setItem('isSidebarClose', isSidebarClose);
     toggleButton.classList.toggle('rotate');
     closeAllSubMenus();
   });
