@@ -6,5 +6,5 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
     site: 'https://adriangolmayo.github.io',
     output: 'static', 
-    base: '/tools-provider', 
+    base: '/tools-provider/', 
 });
