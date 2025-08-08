@@ -64,7 +64,12 @@ body{
   display: flex;
   justify-content: flex-end;
   margin-bottom: 16px;
-
+}
+#sidebar #logo-link a:hover{
+  background-color: transparent;
+}
+#sidebar.close #logo-link a{
+  opacity: 0;
 }
 #sidebar ul li.active a{
   color: var(--accent-clr);
@@ -145,11 +150,14 @@ body{
   width: 100%;
   display: grid;
   place-items: center;
-  margin: auto;
+  margin: 0, auto;
+  padding: 0;
 }
 #logo {
-  height: 3rem;
-  width: 3rem;
+  padding: 0;
+  margin: 0;
+  height: 6rem;
+  width: 6rem;
 }
 
 main{
