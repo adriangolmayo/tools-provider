@@ -15,7 +15,7 @@
         clip-rule="evenodd"></path>
     </svg>
   </div>
-  <div class="result-box custom-scrollbar"></div>
+  <div id="result-box" class="result-box custom-scrollbar"></div>
 </div>
 <script>
   import tools from '../../assets/tools.json';
@@ -25,19 +25,46 @@
   const inputBox = document.getElementById('input-box') as HTMLInputElement;
 
   if (inputBox) {
-    inputBox.onkeyup = function () {
+    const searchFunction = function () {
       let input = inputBox.value.toLowerCase();
       let result: Tool[] = [];
-      if (input.length > 0) {
-        result = tools.filter((tool) => {
-          return tool.name.toLowerCase().includes(input.toLocaleLowerCase());
-        });
-      }
+      result = tools.filter((tool) => {
+        return tool.name.toLowerCase().includes(input.toLowerCase());
+      });
       display(result);
       if (!result.length && resultsBox) {
         resultsBox.innerHTML = '';
       }
     };
+    let isMouseOverInput = false;
+    let isMouseOverResults = false;
+    const clearResults = function () {
+      if (resultsBox) {
+        resultsBox.innerHTML = '';
+      }
+    };
+    const checkAndClearResults = function () {
+      // Only clear if mouse is not over either element
+      if (!isMouseOverInput && !isMouseOverResults) {
+        clearResults();
+      }
+    };
+    inputBox.addEventListener('keyup', searchFunction);
+    inputBox.addEventListener('mouseenter', function () {
+      isMouseOverInput = true;
+      searchFunction();
+    });
+    inputBox.addEventListener('mouseleave', function () {
+      isMouseOverInput = false;
+      setTimeout(checkAndClearResults, 150); // Small delay to allow mouse to move to results
+    });
+    resultsBox.addEventListener('mouseenter', function () {
+      isMouseOverResults = true;
+    });
+    resultsBox.addEventListener('mouseleave', function () {
+      isMouseOverResults = false;
+      setTimeout(checkAndClearResults, 150); // Small delay to allow mouse to move to results
+    });
   }
   function display(result: Tool[]) {
     const content = result.map((tool) => {

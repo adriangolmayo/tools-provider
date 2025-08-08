@@ -9,7 +9,7 @@
   {
     "id": "milliseconds-to-date",
     "name": "Milliseconds to date",
-    "description": "Convert milliseconds to date.",
+    "description": "Convert between Unix epoch milliseconds and human-readable dates (UTC/local). Updates automatically as you type.",
     "category": "Converter",
     "path": "tools/milliseconds-to-date"
   }
