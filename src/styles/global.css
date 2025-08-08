@@ -64,6 +64,8 @@ body{
   display: flex;
   justify-content: flex-end;
   margin-bottom: 16px;
+  margin-top: 13px;
+
 }
 #sidebar #logo-link a:hover{
   background-color: transparent;
@@ -156,8 +158,8 @@ body{
 #logo {
   padding: 0;
   margin: 0;
-  height: 6rem;
-  width: 5rem;
+  height: 5rem;
+  width: 5.5rem;
 }
 
 main{
