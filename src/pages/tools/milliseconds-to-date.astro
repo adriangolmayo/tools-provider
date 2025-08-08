@@ -8,12 +8,84 @@ const currentTool = getTool('milliseconds-to-date');
 {
   currentTool != null && (
     <BaseLayoutTool currentTool={currentTool}>
-      <form id="tokenForm" class="container-tool">
-        <div style="margin:50px; align-items: center;">
-          <h1 style="margin-bottom:20px;">In developing &#128513</h1>
-          <h1>Thank you for your patient!</h1>
+      <section class="container-tool">
+        <div class="grid">
+          <div class="grid-item">
+            <label for="msInput">Milliseconds (since Unix epoch, UTC)</label>
+            <input
+              id="msInput"
+              type="number"
+              placeholder="e.g. 1691491200000"
+            />
+            <div style="margin-top:10px">
+              <label>Result</label>
+              <div id="msResult" class="result" />
+            </div>
+          </div>
+          <div class="align-end grid-item">
+            <label class="millisecond" for="dateInput">
+              Date &amp; Time (local)
+            </label>
+            <input id="dateInput" type="datetime-local" />
+            <div style="margin-top:10px">
+              <label>Result</label>
+              <div id="dateResult" class="result" />
+            </div>
+          </div>
         </div>
-      </form>
+        <div class="explain">
+          <strong>What is Unix time?</strong>
+          <p>
+            Unix time (POSIX time) represents a point in time as the number of
+            milliseconds since <code>1970-01-01T00:00:00Z</code>. It is widely
+            used in computing for its simplicity.
+          </p>
+        </div>
+      </section>
     </BaseLayoutTool>
   )
 }
+<script>
+  (function () {
+    const msInput = document.getElementById('msInput') as HTMLInputElement;
+    const msResult = document.getElementById('msResult') as HTMLDivElement;
+    const dateInput = document.getElementById('dateInput') as HTMLInputElement;
+    const dateResult = document.getElementById('dateResult') as HTMLDivElement;
+    const formatLocal = (d: Date) => d.toString();
+    const formatUtc = (d: Date) => d.toISOString();
+
+    function showMsResult(value: any) {
+      if (!value) {
+        msResult.textContent = '';
+        return;
+      }
+      const ms = Number(value);
+      const date = new Date(ms);
+      if (isNaN(ms)) {
+        msResult.textContent = 'Invalid milliseconds';
+        return;
+      }
+      msResult.innerHTML = `UTC: <code>${formatUtc(date)}</code><br>Local: ${formatLocal(date)}`;
+    }
+
+    function showDateResult(value: string | number | Date) {
+      if (!value) {
+        dateResult.textContent = '';
+        return;
+      }
+      const date = new Date(value);
+      if (isNaN(date.getTime())) {
+        dateResult.textContent = 'Invalid date';
+        return;
+      }
+      dateResult.innerHTML = `Milliseconds: <code>${date.getTime()}</code><br>UTC: <code>${formatUtc(date)}</code><br>Local: ${formatLocal(date)}`;
+    }
+
+    msInput.addEventListener('input', (event: Event) =>
+      showMsResult((event.target as HTMLInputElement).value)
+    );
+    dateInput.addEventListener('input', (event: Event) =>
+      showDateResult((event.target as HTMLInputElement).value)
+    );
+  })();
+</script>
