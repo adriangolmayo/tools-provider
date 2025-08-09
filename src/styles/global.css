@@ -14,6 +14,7 @@ html.light {
   --accent: #60a5fa;
   --glass: #ffffff08;
   --inside-box: #e4e4e44a;
+  --button-background: #e2e8f0;
 }
 html.dark {
   --base-clr: #1a1b21;
@@ -30,6 +31,7 @@ html.dark {
   --shadow: #fdf9e899;
   --glass: #000000;
   --inside-box: #5c5e5e4a;
+  --button-background: #4a5568;
 }
 
 * {
@@ -449,14 +451,17 @@ a#home svg {
   transform: scale(1);
 }
 #textAreaTokenDisplay {
+  background: var(--inside-box);
+  border-radius: 8px;
+  border: 1px solid var(--text-clr);
   text-align: center;
   word-break: break-all;
   width: 100%;
+  color: inherit;
   min-height: 200px;
   overflow: auto;
-}
-#textAreaTokenDisplay:hover {
-  border: 1px solid var(--accent-clr);
+  padding: 0.5rem;
+  box-sizing: border-box;
 }
 .button-group button {
   padding: 12px 24px;
@@ -467,8 +472,10 @@ a#home svg {
     transform 0.2s ease,
     box-shadow 0.2s ease;
   margin: 10px;
+  background: var(--button-background);
+  color: inherit;
 }
-.button-group button:hover {
+.button-display:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 15px var(--shadow);
 }
