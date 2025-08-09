@@ -51,7 +51,14 @@ const currentTool = getTool('milliseconds-to-date');
     const msResult = document.getElementById('msResult') as HTMLDivElement;
     const dateInput = document.getElementById('dateInput') as HTMLInputElement;
     const dateResult = document.getElementById('dateResult') as HTMLDivElement;
-    const formatLocal = (d: Date) => d.toString();
+
+    const formatLocalfunction = (d: Date) => {
+      const dateStr = d.toDateString();
+      const timeStr = d.toTimeString().split(' ')[0];
+      const milliseconds = String(d.getMilliseconds()).padStart(3, '0');
+      return `${dateStr} ${timeStr}.${milliseconds}`;
+    };
+    const formatLocal = (d: Date) => formatLocalfunction(d);
     const formatUtc = (d: Date) => d.toISOString();
 
     function showMsResult(value: any) {
@@ -65,7 +72,7 @@ const currentTool = getTool('milliseconds-to-date');
         msResult.textContent = 'Invalid milliseconds';
         return;
       }
-      msResult.innerHTML = `UTC: <code>${formatUtc(date)}</code><br>Local: ${formatLocal(date)}`;
+      msResult.innerHTML = `<span class='result-title'>UTC:</span> &nbsp; <code>${formatUtc(date)}</code><br><span class='result-title'>Local: </span>&nbsp; ${formatLocal(date)}`;
     }
 
     function showDateResult(value: string | number | Date) {
@@ -78,7 +85,7 @@ const currentTool = getTool('milliseconds-to-date');
         dateResult.textContent = 'Invalid date';
         return;
       }
-      dateResult.innerHTML = `Milliseconds: <code>${date.getTime()}</code><br>UTC: <code>${formatUtc(date)}</code><br>Local: ${formatLocal(date)}`;
+      dateResult.innerHTML = `<span class='result-title'>Milliseconds:</span>&nbsp; <code>${date.getTime()}</code><br><span class='result-title'>UTC:</span>&nbsp; <code>${formatUtc(date)}</code><br><span class='result-title'>Local:</span>&nbsp; ${formatLocal(date)}`;
     }
 
     msInput.addEventListener('input', (event: Event) =>
